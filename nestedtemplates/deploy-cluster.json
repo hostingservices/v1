@@ -75,8 +75,8 @@
     },
     "vmCount": {
       "type": "int",
-      "minValue": 2,
-      "maxValue": 3,
+      "minValue": 1,
+      "maxValue": 10,
       "metadata": {
         "description": "Number of VMs to be created in cluster (Min=2, Max=3)"
       }
@@ -103,6 +103,10 @@
     },
     "imageOffer": {
       "type": "string",
+      "allowedvalues": [
+        "2016-Datacenter",
+        "2012-R2-Datacenter"
+      ],
       "defaultValue": "2016-Datacenter"
     },
     "imageSKU": {
