@@ -103,15 +103,15 @@
     },
     "imageOffer": {
       "type": "string",
+      "defaultValue": "WindowsServer"
+    },
+    "imageSKU": {
+      "type": "string",
       "allowedvalues": [
         "2016-Datacenter",
         "2012-R2-Datacenter"
       ],
       "defaultValue": "2016-Datacenter"
-    },
-    "imageSKU": {
-      "type": "string",
-      "defaultValue": "Standard"
     },
     "imageVersion": {
       "type": "string",
