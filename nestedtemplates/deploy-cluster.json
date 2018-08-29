@@ -230,7 +230,7 @@
       "comments": "This VM DSC extension prepares the server",
       "copy": {
         "name": "virtualMachineExtensionLoop",
-        "count": "(parameters('vmCount')"
+        "count": "[parameters('vmCount')]"
       },
       "dependsOn": [
         "virtualMachineLoop"
