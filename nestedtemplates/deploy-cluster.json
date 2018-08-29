@@ -99,11 +99,11 @@
     },
     "imagePublisher": {
       "type": "string",
-      "defaultValue": "MicrosoftSQLServer"
+      "defaultValue": "MicrosoftWindowsServer"
     },
     "imageOffer": {
       "type": "string",
-      "defaultValue": "SQL2016SP1-WS2016"
+      "defaultValue": "2016-Datacenter"
     },
     "imageSKU": {
       "type": "string",
@@ -125,10 +125,10 @@
     "vmNametypePrefix": "[concat(parameters('VMnamePrefix'),'ap')]",
     "vmAvailabilitySetName": "[concat(parameters('ResourcenamePrefix'),'.as')]",
     "vmLoopTemplateURL": "[concat(parameters('_artifactsLocation'),'/nestedtemplates/newVM.json',parameters('_artifactsLocationSasToken'))]",
-    "sfciPrepModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/prep-sfci.ps1.zip',parameters('_artifactsLocationSasToken'))]",
-    "sfciPrepFunction": "PrepSFCI.ps1\\PrepSFCI",
-    "sfciConfigModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/config-sfci.ps1.zip',parameters('_artifactsLocationSasToken'))]",
-    "sfciConfigFunction": "ConfigSFCI.ps1\\ConfigSFCI"
+    "PrepModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/prep.ps1.zip',parameters('_artifactsLocationSasToken'))]",
+    "PrepFunction": "Prep.ps1\\Prep",
+    "ConfigModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/config.ps1.zip',parameters('_artifactsLocationSasToken'))]",
+    "ConfigFunction": "Config.ps1\\Config"
   },
   "resources": [
     {
@@ -227,10 +227,10 @@
     },
     {
       "apiVersion": "2017-12-01",
-      "comments": "This VM DSC extension prepares the second cluster node",
+      "comments": "This VM DSC extension prepares the server",
       "copy": {
         "name": "virtualMachineExtensionLoop",
-        "count": "[sub(parameters('vmCount'),1)]"
+        "count": "(parameters('vmCount')"
       },
       "dependsOn": [
         "virtualMachineLoop"
@@ -243,8 +243,8 @@
         "typeHandlerVersion": "2.20",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "modulesUrl": "[variables('sfciPrepModulesURL')]",
-          "configurationFunction": "[variables('sfciPrepFunction')]",
+          "modulesUrl": "[variables('PrepModulesURL')]",
+          "configurationFunction": "[variables('PrepFunction')]",
           "properties": {
             "domainName": "[parameters('domainName')]",
             "adminCreds": {
